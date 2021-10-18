@@ -1,5 +1,5 @@
 ---
-to: src/commands/<%= name %>.ts
+to: src/lib/commands/<%= name %>.ts
 unless_exists: true
 ---
 import { CommandInteraction } from 'discord.js'
