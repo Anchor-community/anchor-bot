@@ -1,6 +1,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    "typeRoots": ["@types"],
     "target": "ESNext",
     "module": "CommonJS",
     "outDir": "./build",
@@ -17,6 +18,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "pretty": true,
-    "newLine": "CRLF"
+    "newLine": "CRLF",
+    "resolveJsonModule": true,
   }
 }

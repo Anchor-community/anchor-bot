@@ -8,9 +8,7 @@ config()
 
 const commands = [pingCommand, githubCommand]
 
-const rest = new REST({ version: '9' }).setToken(
-  process.env.BOT_TOKEN as string
-)
+const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN as string)
 
 export const prepareCommands = (client: Client) => {
   try {
