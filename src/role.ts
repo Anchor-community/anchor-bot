@@ -8,7 +8,7 @@ export const prepareRoleManager = (client: Client) => {
     if (member.user.bot) return
 
     const guestRole = await member.guild.roles.fetch(roles.guestRoleId)
-    guestRole && member.roles.add(guestRole)
+    guestRole && member.roles.add(guestRole).catch((err) => console.log(err))
   })
 
   client.on('messageCreate', async (message: Message) => {
@@ -17,8 +17,8 @@ export const prepareRoleManager = (client: Client) => {
     const verifiedRole = await message.member?.guild.roles.fetch(roles.verifiedRoleId)
 
     if (message.channelId === introductionChannel?.id) {
-      guestRole && message.member?.roles.remove(guestRole)
-      verifiedRole && message.member?.roles.add(verifiedRole)
+      guestRole && message.member?.roles.remove(guestRole).catch((err) => console.error(err))
+      verifiedRole && message.member?.roles.add(verifiedRole).catch((err) => console.error(err))
     }
   })
 }
