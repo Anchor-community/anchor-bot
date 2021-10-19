@@ -1,20 +1,21 @@
+import { config } from 'dotenv'
 import { Client, GuildMember, Message } from 'discord.js'
-import roles from './lib/roles/roles.json'
-import channels from './lib/channels/channels.json'
+
+config()
 
 export const prepareRoleManager = (client: Client) => {
   console.log('loading Role manager!')
   client.on('guildMemberAdd', async (member: GuildMember) => {
     if (member.user.bot) return
 
-    const guestRole = await member.guild.roles.fetch(roles.guestRoleId)
+    const guestRole = await member.guild.roles.fetch(process.env.GUEST_ROLE as string)
     guestRole && member.roles.add(guestRole).catch((err) => console.log(err))
   })
 
   client.on('messageCreate', async (message: Message) => {
-    const introductionChannel = await message.guild?.channels.fetch(channels.introductionChannelId)
-    const guestRole = await message.member?.guild.roles.fetch(roles.guestRoleId)
-    const verifiedRole = await message.member?.guild.roles.fetch(roles.verifiedRoleId)
+    const introductionChannel = await message.guild?.channels.fetch(process.env.INTRODUCTION_CHANNEL as string)
+    const guestRole = await message.member?.guild.roles.fetch(process.env.GUEST_ROLE as string)
+    const verifiedRole = await message.member?.guild.roles.fetch(process.env.VERIFIED_ROLE as string)
 
     if (message.channelId === introductionChannel?.id) {
       guestRole && message.member?.roles.remove(guestRole).catch((err) => console.error(err))

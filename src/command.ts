@@ -14,15 +14,9 @@ export const prepareCommands = (client: Client) => {
   try {
     console.log('Started refreshing application (/) commands.')
 
-    rest.put(
-      Routes.applicationGuildCommands(
-        process.env.CLIENT_ID as string,
-        process.env.GUILD_ID as string
-      ),
-      {
-        body: commands,
-      }
-    )
+    rest.put(Routes.applicationGuildCommands(process.env.CLIENT_ID as string, process.env.GUILD_ID as string), {
+      body: commands,
+    })
 
     console.log('Successfully reloaded application (/) commands.')
   } catch (error) {
