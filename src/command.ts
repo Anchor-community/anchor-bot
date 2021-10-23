@@ -2,11 +2,11 @@ import { config } from 'dotenv'
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import { Client } from 'discord.js'
-import { pingCommand, ping, githubCommand, github } from './lib/commands'
+import { pingCommand, ping, githubCommand, github, musicCommand, music } from './lib/commands'
 
 config()
 
-const commands = [pingCommand, githubCommand]
+const commands = [pingCommand, githubCommand, musicCommand]
 
 const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN as string)
 
@@ -26,6 +26,7 @@ export const prepareCommands = (client: Client) => {
   client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand()) return
 
+    music(interaction)
     ping(interaction)
     github(interaction)
   })
