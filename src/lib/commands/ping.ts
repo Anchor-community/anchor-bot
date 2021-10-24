@@ -1,12 +1,12 @@
 import { CommandInteraction } from 'discord.js'
 
 export const pingCommand = {
-  name: 'peng',
+  name: 'ping',
   description: 'Replies with Pong!',
 }
 
 export const ping = (interaction: CommandInteraction) => {
-  if (interaction.commandName === 'peng') {
+  if (interaction.commandName === 'ping') {
     console.log(interaction.member)
     interaction.reply('pong!')
   }
