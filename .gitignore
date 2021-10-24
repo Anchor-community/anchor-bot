@@ -91,3 +91,5 @@ sw.*
 *.swp
 
 build/
+
+src/music/*
