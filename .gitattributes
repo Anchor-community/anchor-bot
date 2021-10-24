@@ -159,3 +159,4 @@ src/music/2-27[[:space:]]300[[:space:]]p.m.[[:space:]](~Snowy[[:space:]]Weather~
 src/music/2-32[[:space:]]800[[:space:]]p.m.[[:space:]](~Snowy[[:space:]]Weather~).mp3 filter=lfs diff=lfs merge=lfs -text
 src/music/3-07[[:space:]]Completion[[:space:]]Fanfare.mp3 filter=lfs diff=lfs merge=lfs -text
 src/music/3-37[[:space:]]Museum[[:space:]]-[[:space:]]Fish[[:space:]]Exhibit[[:space:]]2.mp3 filter=lfs diff=lfs merge=lfs -text
+*.mp3 filter=lfs diff=lfs merge=lfs -text
