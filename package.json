@@ -58,6 +58,9 @@
     "prettier": "^2.4.1",
     "sodium": "^3.0.2"
   },
+  "resolutions": {
+    "ansi-regex": "^5.0.1"
+  },
   "description": "Management bot for Anchor server",
   "main": "build/index.js",
   "repository": "git@github.com:Anchor-community/anchor-bot.git",

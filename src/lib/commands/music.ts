@@ -1,7 +1,7 @@
 import { config } from 'dotenv'
 import { CommandInteraction, GuildMember } from 'discord.js'
 import { ApplicationCommandOptionType } from 'discord-api-types'
-import { play } from '../music'
+import { play, stop } from '../music'
 import { getVoiceConnection } from '@discordjs/voice'
 
 config()
@@ -20,14 +20,10 @@ export const musicCommand = {
           name: 'Play',
           value: 'play',
         },
-        // {
-        //   name: 'Pause',
-        //   value: 'pause',
-        // },
-        // {
-        //   name: 'Stop',
-        //   value: 'stop',
-        // },
+        {
+          name: 'Stop',
+          value: 'stop',
+        },
       ],
     },
   ],
@@ -49,17 +45,13 @@ export const music = (interaction: CommandInteraction) => {
         play(interaction, voiceConnection)
         break
 
-      // case 'pause':
-      //   pause(interaction)
-      //   break
-
-      // case 'stop':
-      //   break
+      case 'stop':
+        stop(interaction, voiceConnection)
+        break
 
       default:
+        interaction.reply('未知のコマンドが送信されました...。')
         break
     }
-
-    interaction.reply('音楽を流します！')
   }
 }
