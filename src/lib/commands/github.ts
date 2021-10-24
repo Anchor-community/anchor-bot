@@ -19,15 +19,11 @@ export const github = (interaction: CommandInteraction) => {
             break
 
           case 1:
-            interaction.reply(
-              `Github is in trouble!\nProblem: ${incidents[0]?.name}`
-            )
+            interaction.reply(`Github is in trouble!\nProblem: ${incidents[0]?.name}`)
             break
 
           default:
-            interaction.reply(
-              `Github has multiple troubles!\nTry checking: https://www.githubstatus.com/`
-            )
+            interaction.reply(`Github has multiple troubles!\nTry checking: https://www.githubstatus.com/`)
             break
         }
       })

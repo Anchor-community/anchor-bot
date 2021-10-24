@@ -6,7 +6,7 @@ import { pingCommand, ping, githubCommand, github, musicCommand, music } from '.
 
 config()
 
-const commands = [pingCommand, githubCommand, musicCommand]
+const commands = [musicCommand, pingCommand, githubCommand]
 
 const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN as string)
 
