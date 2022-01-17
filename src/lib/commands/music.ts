@@ -1,35 +1,38 @@
 import { config } from 'dotenv'
 import { CommandInteraction, GuildMember } from 'discord.js'
-import { ApplicationCommandOptionType } from 'discord-api-types'
-import { play, stop } from '../music'
+import { play, youtube, stop } from './music/'
 import { getVoiceConnection } from '@discordjs/voice'
 
-config()
+import { SlashCommandBuilder } from '@discordjs/builders'
 
-export const musicCommand = {
-  name: 'music',
-  description: '音楽を流します',
-  options: [
-    {
-      type: ApplicationCommandOptionType.String,
-      name: 'state',
-      description: '音楽の再生・ポーズ・停止を指定します。',
-      required: true,
-      choices: [
-        {
-          name: 'Play',
-          value: 'play',
-        },
-        {
-          name: 'Stop',
-          value: 'stop',
-        },
-      ],
-    },
-  ],
-}
+config({ path: `${__dirname}/../envs/.env` })
 
-export const music = (interaction: CommandInteraction) => {
+const musicCommand = new SlashCommandBuilder()
+  .setName('music')
+  .setDescription('音楽を流します。')
+  .addStringOption((option) =>
+    option
+      .setName('state')
+      .setDescription('音楽の再生・ポーズ・停止を指定します。')
+      .setRequired(true)
+      .addChoice('Play', 'play')
+      .addChoice('Stop', 'stop')
+  )
+
+const youtubeCommand = new SlashCommandBuilder()
+  .setName('youtube')
+  .setDescription('Youtubeの任意の動画音源を再生します。')
+  .addSubcommand((subCommand) =>
+    subCommand
+      .setName('video')
+      .setDescription('Youtubeの任意の動画音源を再生します。')
+      .addStringOption((option) => option.setName('video').setDescription('Youtubeの任意の動画音源を再生します。'))
+  )
+
+export const playerCommands = [musicCommand, youtubeCommand]
+
+export const player = (interaction: CommandInteraction) => {
+  const voiceConnection = getVoiceConnection(interaction.guild?.id as string)
   if (interaction.commandName === 'music') {
     const sender = interaction.member as GuildMember
 
@@ -37,8 +40,6 @@ export const music = (interaction: CommandInteraction) => {
       interaction.reply('このコマンドはボイスチャンネルに入った状態で実行してください！')
       return
     }
-
-    const voiceConnection = getVoiceConnection(interaction.guild?.id as string)
 
     switch (interaction.options.get('state')?.value) {
       case 'play':
@@ -50,8 +51,12 @@ export const music = (interaction: CommandInteraction) => {
         break
 
       default:
-        interaction.reply('未知のコマンドが送信されました...。')
+        interaction.reply('未知のコマンドが送信されました...。でもどうやって？')
         break
     }
+  }
+
+  if (interaction.commandName === 'youtube') {
+    youtube(interaction, voiceConnection)
   }
 }
