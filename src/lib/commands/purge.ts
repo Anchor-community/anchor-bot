@@ -1,6 +1,7 @@
 import { CommandInteraction } from 'discord.js'
 import { SlashCommandBuilder } from '@discordjs/builders'
 import { purgeTarget, purgeAll, pardonTarget, pardonAll } from './emergency'
+import PrivilegedUsers from '../../../envs/privileged-users.json'
 
 const purgeCommand = new SlashCommandBuilder()
   .setName('purge')
@@ -33,8 +34,12 @@ const unlockCommand = new SlashCommandBuilder()
 export const enforcerCommands = [purgeCommand, lockCommand, pardonCommand, unlockCommand]
 
 export const enforcer = (interaction: CommandInteraction) => {
-  interaction.commandName === 'purge' && purgeTarget(interaction)
-  interaction.commandName === 'purge-all' && purgeAll(interaction)
-  interaction.commandName === 'pardon' && pardonTarget(interaction)
-  interaction.commandName === 'pardon-all' && pardonAll(interaction)
+  if (PrivilegedUsers.users.includes(interaction.user.id)) {
+    interaction.commandName === 'purge' && purgeTarget(interaction)
+    interaction.commandName === 'purge-all' && purgeAll(interaction)
+    interaction.commandName === 'pardon' && pardonTarget(interaction)
+    interaction.commandName === 'pardon-all' && pardonAll(interaction)
+  } else {
+    interaction.reply('特定のユーザー以外はこのコマンドを実行できません。')
+  }
 }

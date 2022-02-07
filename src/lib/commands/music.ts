@@ -2,7 +2,6 @@ import { config } from 'dotenv'
 import { CommandInteraction, GuildMember } from 'discord.js'
 import { play, youtube, stop } from './music/'
 import { getVoiceConnection } from '@discordjs/voice'
-
 import { SlashCommandBuilder } from '@discordjs/builders'
 
 config({ path: `${__dirname}/../envs/.env` })

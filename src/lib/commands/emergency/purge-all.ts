@@ -8,5 +8,5 @@ export const purgeAll = (interaction: CommandInteraction) => {
     })
   )
 
-  interaction.reply('解除までしばらくお待ち下さい。')
+  interaction.reply('すべてのユーザーをパージしました。')
 }
