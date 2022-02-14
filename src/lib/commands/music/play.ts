@@ -13,23 +13,24 @@ import { readdirSync } from 'fs'
 export const play = async (interaction: CommandInteraction, voiceConnection?: VoiceConnection) => {
   const sender = interaction.member as GuildMember
 
-  const connection =
-    voiceConnection ??
-    joinVoiceChannel({
-      channelId: sender.voice.channel?.id as string,
-      guildId: sender.guild.id,
-      adapterCreator: sender.guild.voiceAdapterCreator as DiscordGatewayAdapterCreator,
-    })
+  if (voiceConnection) voiceConnection.destroy()
+
+  const connection = joinVoiceChannel({
+    channelId: sender.voice.channel?.id as string,
+    guildId: sender.guild.id,
+    adapterCreator: sender.guild.voiceAdapterCreator as DiscordGatewayAdapterCreator,
+  })
 
   const player = createAudioPlayer()
   connection.subscribe(player)
 
-  const musics = readdirSync(join(__dirname, '/../../music/')).map((music) => join(__dirname, `/../../music/${music}`))
+  const musics = readdirSync(join(__dirname, '/../../../music/')).map((music) =>
+    join(__dirname, `/../../../music/${music}`)
+  )
 
   // Initial play
 
   let currentTrackIndex = 0
-
   const initialResource = createAudioResource(musics[currentTrackIndex], {
     inlineVolume: true,
   })

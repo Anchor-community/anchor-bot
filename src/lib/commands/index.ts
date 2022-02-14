@@ -1,3 +1,2 @@
-export { pingCommand, ping } from './ping'
-export { githubCommand, github } from './github'
-export { musicCommand, music } from './music'
+export { enforcerCommands, enforcer } from './purge'
+export { playerCommands, player } from './music'
