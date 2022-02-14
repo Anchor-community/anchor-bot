@@ -28,7 +28,7 @@ const youtubeCommand = new SlashCommandBuilder()
       .addStringOption((option) => option.setName('video').setDescription('Youtubeの任意の動画音源を再生します。'))
   )
 
-export const playerCommands = [musicCommand, youtubeCommand]
+export const playerCommands = [musicCommand as SlashCommandBuilder, youtubeCommand]
 
 export const player = (interaction: CommandInteraction) => {
   const voiceConnection = getVoiceConnection(interaction.guild?.id as string)
