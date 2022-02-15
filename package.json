@@ -7,7 +7,7 @@
   },
   "scripts": {
     "new": "hygen guild-command add",
-    "start": "node ./build/index.js",
+    "start": "node ./build/src/index.js",
     "dev": "ts-node ./src/index.ts",
     "lint": "eslint --fix; prettier --write src/**/*.ts",
     "compile": "tsc -p .",
